@@ -5,6 +5,6 @@ create-react-app +
  - I18Next
  - Old browser polyfills
  - scss support (node-sass-chokidar)
- - <Helmet>
+ - `<Helmet>` to handle view page settings
  - store.js as state storage for offline usage
  - express.js proxy + production setup
