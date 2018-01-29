@@ -6,5 +6,5 @@ create-react-app +
  - Old browser polyfills
  - scss support (node-sass-chokidar)
  - `<Helmet>` to handle view page settings
- - store.js as state storage for offline usage
  - express.js proxy + production setup
+ - Redux + redux-thunk (async) + redux-persist

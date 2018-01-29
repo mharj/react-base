@@ -6,7 +6,12 @@ import {I18nextProvider} from 'react-i18next';
 import i18n from './i18n';
 import './index.css';
 import App from './App';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {Provider} from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
+import configureStore from './configureStore';
 
-ReactDOM.render(<I18nextProvider i18n={ i18n }><App /></I18nextProvider>, document.getElementById('root'));
+let {store, persistor} = configureStore();
+
+ReactDOM.render(<Provider store={store}><PersistGate loading={null} persistor={persistor}><I18nextProvider i18n={ i18n }><App /></I18nextProvider></PersistGate></Provider>, document.getElementById('root'));
 registerServiceWorker();

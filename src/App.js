@@ -8,6 +8,7 @@ import {translate} from 'react-i18next';
 import logo from './logo.svg';
 import './App.css';
 import Home from './views/Home';
+import {connect} from 'react-redux';
 
 class App extends Component {
 	constructor(props) {
@@ -27,15 +28,28 @@ class App extends Component {
 				<button onClick={()=>this.onLanguageChange('fi-FI')}>Suomi</button>
 				<button onClick={()=>this.onLanguageChange('en-EN')}>English</button>
 				<button onClick={()=>this.onLanguageChange('sv-SV')}>Svenska</button>
+				<br/>
+				{this.props.isLoading?'Fetching API data ..':''}<br/>
+				{this.props.error?<h2 style={{color: 'red'}}>Error: {this.props.error.message}</h2>:null}<br/>
 				<Router>
 					<Switch>
 						<Route exact path='/' component={Home}/>
 					</Switch>
 				</Router>
+				{process.env.NODE_ENV !== "production"?
+					<code>
+						{this.props.error && this.props.error.stack}
+					</code>
+				:null}
 			</div>
 		);
 	}
 }
-
-export default translate()(App);
+const mapStateToProps = (state) => {
+	return {
+		error: state.base.error,
+		isLoading: state.base.isLoading,
+	};
+};
+export default connect(mapStateToProps)(translate()(App));
 

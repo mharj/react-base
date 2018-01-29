@@ -1,3 +1,4 @@
+const etag = require('etag');
 const express = require('express');
 const app = express();
 
@@ -8,8 +9,15 @@ if ( process.env.NODE_ENV == 'production') { // attach build directory if produc
 }
 
 app.get('/api/hello', (req, res) => {
-	res.json({hello: 'world'})
-	res.end();
+	let data = {hello: 'world'};
+	let hash = etag(JSON.stringify(data));
+	if ( req.headers['if-none-match'] && hash.replace(/\"/g, '') == req.headers['if-none-match'].replace(/\"/g, '') ) {
+		res.status(304).send('Not Modified');
+	} else {
+		res.setHeader('ETag', tag);
+		res.json(data);
+		res.end();
+	}
 });
 
 app.listen(port, () => {
