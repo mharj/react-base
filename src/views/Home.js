@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Helmet} from "react-helmet";
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import * as actions from '../actions/base';
+import actions from '../actions';
 
 
 class Home extends Component {
