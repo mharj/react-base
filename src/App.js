@@ -36,6 +36,7 @@ class App extends Component {
 						<Route exact path='/' component={Home}/>
 					</Switch>
 				</Router>
+				<b>Service Worker status: {this.props.workerState}</b>
 				{process.env.NODE_ENV !== "production"?
 					<code>
 						{this.props.error && this.props.error.stack}
