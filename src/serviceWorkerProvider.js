@@ -6,21 +6,32 @@ class ServiceWorkerProvider extends React.Component {
 		super(props);
 		this.state = {
 			workerState: null,
+			updateFunction: null,
 		};
 		this.reloadCallback = this.reloadCallback.bind(this);
+		this.runUpdate = this.runUpdate.bind(this);
+		this.getUpdateFunction = this.getUpdateFunction.bind(this);
 	}
 	componentDidMount() {
-		registerServiceWorker(this.reloadCallback);
+		registerServiceWorker(this.reloadCallback, this.getUpdateFunction);
 	}
 	reloadCallback(state) {
 		this.setState({
 			workerState: state,
 		});
 	}
-	render() {
-		return React.cloneElement(React.Children.only(this.props.children), {
-			workerState: this.state.workerState,
+	getUpdateFunction(update) {
+		this.setState({
+			updateFunction: update,
 		});
+	}
+	runUpdate() {
+		if ( this.state.updateFunction ) {
+			this.state.updateFunction();
+		}
+	}
+	render() {
+		return React.cloneElement(React.Children.only(this.props.children), {workerState: this.state.workerState, swCheckUpdate: this.runUpdate});
 	}
 }
 export default ServiceWorkerProvider;
