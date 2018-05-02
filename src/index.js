@@ -8,7 +8,7 @@ import './index.css';
 import App from './App';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
-import ServiceWorkerProvider from './serviceWorkerProvider';
+import ServiceWorkerProvider from './ServiceWorkerProvider';
 import configureStore from './configureStore';
 
 let {store, persistor} = configureStore();
