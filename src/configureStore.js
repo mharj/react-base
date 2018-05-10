@@ -15,7 +15,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default () => {
 	let store = createStore(
 		persistedReducer,
-		{base: {
+		{app: {
 			error: null,
 			etag: null,
 		}},

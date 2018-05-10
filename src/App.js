@@ -36,7 +36,8 @@ class App extends Component {
 						<Route exact path='/' component={Home}/>
 					</Switch>
 				</Router>
-				<b>Service Worker status: {this.props.workerState}</b>
+				<br/>
+				<b>Service Worker status: {this.props.workerState} <button onClick={this.props.swCheckUpdate}>Check updates</button></b>
 				{process.env.NODE_ENV !== "production"?
 					<code>
 						{this.props.error && this.props.error.stack}
@@ -48,8 +49,8 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		error: state.base.error,
-		isLoading: state.base.isLoading,
+		error: state.app.error,
+		isLoading: state.app.isLoading,
 	};
 };
 export default connect(mapStateToProps)(translate()(App));

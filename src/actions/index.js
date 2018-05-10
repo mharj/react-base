@@ -1,3 +1,3 @@
-import * as baseActions from '../actions/base';
+import * as appActions from '../actions/appActions';
 
-export default Object.assign({}, baseActions);
+export default Object.assign({}, appActions);

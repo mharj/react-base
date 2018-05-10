@@ -1,10 +1,10 @@
 # Basic React base
 
 create-react-app +
- - HashRouter
+ - HashRouter for "views"
  - I18Next
  - Old browser polyfills
  - scss support (node-sass-chokidar)
  - `<Helmet>` to handle view page settings
- - express.js proxy + production setup
+ - Express.js proxy + production setups
  - Redux + redux-thunk (async) + redux-persist

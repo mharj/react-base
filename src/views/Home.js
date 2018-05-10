@@ -32,8 +32,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		value: state.base.value,
-		etag: state.base.etag,
+		value: state.app.value,
+		etag: state.app.etag,
 	};
 };
 

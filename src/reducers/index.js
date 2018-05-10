@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import base from './base';
+import app from './appReducer';
 
 const appReducer = combineReducers({
-	base,
+	app,
 });
 export default appReducer;
