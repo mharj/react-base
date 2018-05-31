@@ -3,6 +3,8 @@ export const ACTION_TYPES = Object.freeze({
 	LOADING_DONE:		'LOADING_DONE',
 	LOADING_ERROR:		'LOADING_ERROR',
 	LOADING_NO_CHANGE:	'LOADING_NO_CHANGE',
+	LOGIN:				'LOGIN',
+	LOGOUT:				'LOGOUT',
 });
 
 export default (state = {
@@ -10,7 +12,9 @@ export default (state = {
 	value: null,
 	etag: null,
 	error: null,
-}, {type, isLoading, value, etag, error}) => {
+	username: null,
+	password: null,
+}, {type, isLoading, value, username, password, etag, error}) => {
 	switch (type) {
 		case ACTION_TYPES.LOADING:
 			return Object.assign({}, state, {
@@ -33,6 +37,16 @@ export default (state = {
 				value: null,
 				etag: null,
 				error: error,
+			});
+		case ACTION_TYPES.LOGIN:
+			return Object.assign({}, state, {
+				username: username,
+				password: password,
+			});
+		case ACTION_TYPES.LOGOUT:
+			return Object.assign({}, state, {
+				username: null,
+				password: null,
 			});
 		default:
 			return state;

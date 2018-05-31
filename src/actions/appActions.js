@@ -39,3 +39,7 @@ export const getHome = (etag) => (dispatch) => {
 			});
 	}, 1000);
 };
+
+export const doLogin = (username, password) => (dispatch) => {
+	return Promise.resolve( dispatch({type: TYPES.LOGIN, username, password}) );
+};
