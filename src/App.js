@@ -26,6 +26,7 @@ class App extends Component {
 		return this.props.username === 'test' && this.props.password === 'password';
 	}
 	render() {
+		const {isLoggedIn} = this.props;
 		return (
 			<div className="App">
 				<header className="App-header">
@@ -41,7 +42,6 @@ class App extends Component {
 				<Router>
 					<div>
 						<div>
-
 							<Link to='/'><button>Home</button></Link>
 							<Link to='/login'><button>Login</button></Link>
 							<Link to='/secret'><button>Secret</button></Link>
@@ -49,16 +49,17 @@ class App extends Component {
 						<br/>
 						<Route exact={true} path='/' component={Home}/>
 						<Route exact={true} path='/login' component={Login}/>
-						<PrivateRoute isValid={this.checkLogin()} failPath="/login" exact={true} path='/secret' component={Secret} />
+						<PrivateRoute isValid={isLoggedIn} failPath="/login" exact={true} path='/secret' component={Secret} />
 					</div>
 				</Router>
 
 				<br/>
 				<b>Service Worker status: {this.props.workerState} <button onClick={this.props.swCheckUpdate}>Check updates</button></b>
+				<br/>
 				{process.env.NODE_ENV !== "production"?
-					<code>
+					<pre style={{textAlign: 'left'}}>
 						{this.props.error && this.props.error.stack}
-					</code>
+					</pre>
 				:null}
 			</div>
 		);
@@ -68,8 +69,7 @@ const mapStateToProps = (state) => {
 	return {
 		error: state.app.error,
 		isLoading: state.app.isLoading,
-		username: state.app.username,
-		password: state.app.password,
+		isLoggedIn: state.app.isLoggedIn,
 	};
 };
 export default connect(mapStateToProps)(translate()(App));

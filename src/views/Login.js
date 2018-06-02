@@ -21,6 +21,9 @@ class Login extends Component {
 		this.props.doLogin(this.state.username, this.state.password)
 			.then(() => {
 				this.props.history.push('/');
+			})
+			.catch( () => {
+				// ignore
 			});
 	}
 	onChange(e) {
