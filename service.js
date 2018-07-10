@@ -4,7 +4,7 @@ const app = express();
 app.set('etag', false);
 app.set('x-powered-by', false);
 
-let port = process.env.PORT || (process.env.NODE_ENV == 'production'?3000:3001);
+let port = (process.env.NODE_ENV !== 'production'?3001:(process.env.PORT || 3000));
 
 if ( process.env.NODE_ENV == 'production') { // attach build directory if production env
 	app.use(express.static('build'));
