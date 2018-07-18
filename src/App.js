@@ -4,14 +4,28 @@ import {
 	HashRouter as Router,
 	Link
 } from 'react-router-dom';
+import Loadable from 'react-loadable';
 import {translate} from 'react-i18next';
 import logo from './logo.svg';
 import './App.css';
-import Home from './views/Home';
-import Login from './views/Login';
-import Secret from './views/Secret';
 import {connect} from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
+
+const Loading = () => <div>Loading!...</div>;
+
+// views code split
+const Home = Loadable({
+	loader: () => import('./views/Home'),
+	loading: Loading,
+});
+const Login = Loadable({
+	loader: () => import('./views/Login'),
+	loading: Loading,
+});
+const Secret = Loadable({
+	loader: () => import('./views/Secret'),
+	loading: Loading,
+});
 
 class App extends Component {
 	constructor(props) {
