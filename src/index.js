@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-import 'whatwg-fetch';
 import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import {I18nextProvider} from 'react-i18next';
@@ -10,7 +8,8 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
 import ServiceWorkerProvider from './ServiceWorkerProvider';
 import configureStore from './configureStore';
-
+import('babel-polyfill');
+import('whatwg-fetch');
 let {store, persistor} = configureStore();
 
 ReactDOM.render(
