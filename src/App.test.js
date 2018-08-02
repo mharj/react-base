@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import App from './App';
 import renderer from 'react-test-renderer';
 
 jest.mock('react-i18next', () => ({
-	translate: () => Component => props => <Component t={() => ''} {...props} />,
+	translate: () => (Component) => (props) => <Component t={() => ''} {...props} />,
 }));
 
 it('renders without crashing', () => {
@@ -14,8 +14,6 @@ it('renders without crashing', () => {
 });
 
 test('component rendering', () => {
-	const component = renderer.create(
-		<App />,
-	);
+	const component = renderer.create(<App />);
 	let tree = component.toJSON();
 });

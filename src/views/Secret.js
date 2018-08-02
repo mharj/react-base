@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import {Helmet} from "react-helmet";
+import React from 'react';
+import {Helmet} from 'react-helmet';
 import {translate} from 'react-i18next';
 
-class Secret extends Component {
+class Secret extends React.Component {
 	render() {
 		return (
 			<div>
 				<Helmet>
 					<title>Secret</title>
 				</Helmet>
-				<div>
-					some secret stuff
-				</div>
+				<div>some secret stuff</div>
 			</div>
 		);
 	}

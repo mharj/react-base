@@ -14,7 +14,7 @@ const initialState = {
 	app: {
 		error: null,
 		etag: null,
-	}
+	},
 };
 
 const enhancers = [];

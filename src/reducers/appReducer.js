@@ -1,20 +1,23 @@
 export const ACTION_TYPES = Object.freeze({
-	LOADING:			'LOADING',
-	LOADING_DONE:		'LOADING_DONE',
-	LOADING_ERROR:		'LOADING_ERROR',
+	LOADING: 			'LOADING',
+	LOADING_DONE: 		'LOADING_DONE',
+	LOADING_ERROR: 		'LOADING_ERROR',
 	LOADING_NO_CHANGE:	'LOADING_NO_CHANGE',
 	LOGIN:				'LOGIN',
 	LOGIN_ERROR:		'LOGIN_ERROR',
 	LOGOUT:				'LOGOUT',
 });
 
-export default (state = {
-	isLoading: false,
-	value: null,
-	etag: null,
-	error: null,
-	isLoggedIn: false,
-}, {type, isLoading, value, etag, error}) => {
+export default (
+	state = {
+		isLoading: false,
+		value: null,
+		etag: null,
+		error: null,
+		isLoggedIn: false,
+	},
+	{type, isLoading, value, etag, error},
+) => {
 	switch (type) {
 		case ACTION_TYPES.LOADING:
 			return Object.assign({}, state, {

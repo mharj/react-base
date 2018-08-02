@@ -26,7 +26,7 @@ const isLocalhost = Boolean(
 );
 
 export default function register(setStateCallback, setUpdateFunction) {
-	if (process.env.NODE_ENV === 'production' ) {
+	if (process.env.NODE_ENV === 'production') {
 		if ('serviceWorker' in navigator) {
 			// The URL constructor is available in all browsers that support SW.
 			const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
@@ -59,7 +59,7 @@ export default function register(setStateCallback, setUpdateFunction) {
 			setStateCallback(STATUS.NO_WORKER);
 		}
 	} else {
-		setStateCallback(('serviceWorker' in navigator?STATUS.DEVELOPMENT:STATUS.NO_WORKER));
+		setStateCallback('serviceWorker' in navigator ? STATUS.DEVELOPMENT : STATUS.NO_WORKER);
 	}
 }
 
@@ -88,7 +88,8 @@ function registerValidSW(swUrl, setStateCallback, setUpdateFunction) {
 					}
 				};
 			};
-			if ( setUpdateFunction && registration.update ) { // attach update function
+			if (setUpdateFunction && registration.update) {
+				// attach update function
 				setUpdateFunction(() => {
 					console.log('running serviceWorker update');
 					registration.update();

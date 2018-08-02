@@ -26,7 +26,7 @@ class ServiceWorkerProvider extends React.Component {
 		});
 	}
 	runUpdate() {
-		if ( this.state.updateFunction ) {
+		if (this.state.updateFunction) {
 			this.state.updateFunction();
 		}
 	}

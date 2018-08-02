@@ -5,7 +5,7 @@ const PrivateRoute = ({component: Component, ...routeProps}) => (
 	<Route
 		{...routeProps}
 		render={(props) => {
-			return routeProps.isValid ? <Component {...props} /> : <Redirect to={routeProps.failPath?routeProps.failPath:'/'} />;
+			return routeProps.isValid ? <Component {...props} /> : <Redirect to={routeProps.failPath ? routeProps.failPath : '/'} />;
 		}}
 	/>
 );
