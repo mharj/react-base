@@ -8,6 +8,7 @@ create-react-app +
  - `<Helmet>` to handle view page settings
  - Express.js proxy + production setups
  - Redux + redux-thunk (async) + redux-persist
+ - Code split (react-loadable)
 
 ## possible add-ons
  - react-jss (index.js: <ThemeProvider theme={theme}><App /></ThemeProvider>, App.js: withTheme(App) )
