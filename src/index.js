@@ -6,11 +6,12 @@ import App from './App';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
 import ServiceWorkerProvider from './ServiceWorkerProvider';
-import('babel-polyfill');
-import('whatwg-fetch');
+
 Promise.all([
 	import('./configureStore'),
 	import('./i18n'),
+	import('babel-polyfill'),
+	import('whatwg-fetch'),
 ])
 .then( (loaded) => {
 	const [configureStore, i18n] = loaded;
