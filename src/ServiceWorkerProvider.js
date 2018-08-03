@@ -1,5 +1,4 @@
 import React from 'react';
-import registerServiceWorker from './registerServiceWorker';
 
 class ServiceWorkerProvider extends React.Component {
 	constructor(props) {
@@ -13,7 +12,8 @@ class ServiceWorkerProvider extends React.Component {
 		this.getUpdateFunction = this.getUpdateFunction.bind(this);
 	}
 	componentDidMount() {
-		registerServiceWorker(this.reloadCallback, this.getUpdateFunction);
+		import('./registerServiceWorker' /* webpackChunkName: "register-service-worker" */)
+			.then((registerServiceWorker) => registerServiceWorker.default(this.reloadCallback, this.getUpdateFunction));
 	}
 	reloadCallback(state) {
 		this.setState({
