@@ -8,10 +8,10 @@ import {Provider} from 'react-redux';
 import ServiceWorkerProvider from './ServiceWorkerProvider';
 
 Promise.all([
-	import('./configureStore'),
-	import('./i18n'),
-	import('babel-polyfill'),
-	import('whatwg-fetch'),
+	import('./configureStore' /* webpackChunkName: "configurestore" */),
+	import('./i18n' /* webpackChunkName: "i18n" */),
+	import('babel-polyfill' /* webpackChunkName: "polyfill" */),
+	import('whatwg-fetch' /* webpackChunkName: "fetch" */),
 ])
 .then( (loaded) => {
 	const [configureStore, i18n] = loaded;

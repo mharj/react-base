@@ -11,15 +11,15 @@ const Loading = () => <div>Loading!...</div>;
 
 // views code split
 const Home = loadable({
-	loader: () => import('./views/Home'),
+	loader: () => import('./views/Home' /* webpackChunkName: "home-view" */),
 	loading: Loading,
 });
 const Login = loadable({
-	loader: () => import('./views/Login'),
+	loader: () => import('./views/Login' /* webpackChunkName: "login-view" */),
 	loading: Loading,
 });
 const Secret = loadable({
-	loader: () => import('./views/Secret'),
+	loader: () => import('./views/Secret' /* webpackChunkName: "secret-view" */),
 	loading: Loading,
 });
 
