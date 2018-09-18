@@ -24,28 +24,17 @@ const Secret = loadable({
 });
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.onLanguageChange = this.onLanguageChange.bind(this);
-		this.checkLogin = this.checkLogin.bind(this);
-	}
-	onLanguageChange(lng) {
-		this.props.i18n.changeLanguage(lng);
-	}
-	checkLogin() {
-		return this.props.username === 'test' && this.props.password === 'password';
-	}
 	render() {
-		const {isLoggedIn} = this.props;
+		const {isLoggedIn, t, i18n} = this.props;
 		return (
 			<div className="App">
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
-				<button onClick={() => this.onLanguageChange('fi-FI')}>Suomi</button>
-				<button onClick={() => this.onLanguageChange('en-EN')}>English</button>
-				<button onClick={() => this.onLanguageChange('sv-SV')}>Svenska</button>
+				<button onClick={() => i18n.changeLanguage('fi-FI')}>{t('fin')}</button>
+				<button onClick={() => i18n.changeLanguage('en-EN')}>{t('eng')}</button>
+				<button onClick={() => i18n.changeLanguage('sv-SV')}>{t('sve')}</button>
 				<br />
 				{this.props.isLoading ? 'Fetching API data ..' : ''}
 				<br />
@@ -55,13 +44,13 @@ class App extends React.Component {
 					<div>
 						<div>
 							<Link to="/">
-								<button>Home</button>
+								<button>{t('home')}</button>
 							</Link>
 							<Link to="/login">
-								<button>Login</button>
+								<button>{t('login')}</button>
 							</Link>
-							<Link to="/secret">
-								<button>Secret</button>
+							<Link to="/secret" >
+								<button disabled={isLoggedIn?false:true}>{t('secret')}</button>
 							</Link>
 						</div>
 						<br />

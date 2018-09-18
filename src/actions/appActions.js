@@ -47,3 +47,7 @@ export const doLogin = (username, password) => (dispatch) => {
 		return Promise.reject( dispatch({type: TYPES.LOGIN_ERROR, error: new Error('account or password not match')}) );
 	}
 };
+
+export const doLogout = () => (dispatch) => {
+	return Promise.resolve( dispatch({type: TYPES.LOGOUT}) );
+};
