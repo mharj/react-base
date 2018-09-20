@@ -6,6 +6,8 @@ import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
+import ErrorBoundary from './components/ErrorBoundary';
+import ErrorView from './views/Error';
 
 const Loading = () => <div>Loading!...</div>;
 
@@ -20,6 +22,10 @@ const Login = loadable({
 });
 const Secret = loadable({
 	loader: () => import('./views/Secret' /* webpackChunkName: "secret-view" */),
+	loading: Loading,
+});
+const Broken = loadable({
+	loader: () => import('./views/Broken' /* webpackChunkName: "broken-view" */),
 	loading: Loading,
 });
 
@@ -42,21 +48,27 @@ class App extends React.Component {
 				<br />
 				<Router>
 					<div>
-						<div>
-							<Link to="/">
-								<button>{t('home')}</button>
-							</Link>
-							<Link to="/login">
-								<button>{t('login')}</button>
-							</Link>
-							<Link to="/secret" >
-								<button disabled={isLoggedIn?false:true}>{t('secret')}</button>
-							</Link>
-						</div>
-						<br />
-						<Route exact={true} path="/" component={Home} />
-						<Route exact={true} path="/login" component={Login} />
-						<PrivateRoute isValid={isLoggedIn} failPath="/login" exact={true} path="/secret" component={Secret} />
+						<ErrorBoundary onError={ErrorView} >
+							<div>
+								<Link to="/">
+									<button>{t('home')}</button>
+								</Link>
+								<Link to="/login">
+									<button>{t('login')}</button>
+								</Link>
+								<Link to="/secret">
+									<button disabled={isLoggedIn ? false : true}>{t('secret')}</button>
+								</Link>
+								<Link to="/broken">
+									<button>{t('broken')}</button>
+								</Link>
+							</div>
+							<br />
+							<Route exact={true} path="/" component={Home} />
+							<Route exact={true} path="/login" component={Login} />
+							<PrivateRoute isValid={isLoggedIn} failPath="/login" exact={true} path="/secret" component={Secret} />
+							<Route exact={true} path="/broken" component={Broken} />
+						</ErrorBoundary>
 					</div>
 				</Router>
 

@@ -11,22 +11,22 @@ Promise.all([
 	import('./configureStore' /* webpackChunkName: "configurestore" */),
 	import('./i18n' /* webpackChunkName: "i18n" */),
 	import('babel-polyfill' /* webpackChunkName: "polyfill" */),
-	import('whatwg-fetch' /* webpackChunkName: "fetch" */),
+	import('cross-fetch/polyfill' /* webpackChunkName: "fetch" */),
 ])
-.then( (loaded) => {
-	const [configureStore, i18n] = loaded;
-	let {store, persistor} = configureStore.default();
-	ReactDOM.render(
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<I18nextProvider i18n={i18n.default}>
-					<ServiceWorkerProvider>
-						<App />
-					</ServiceWorkerProvider>
-				</I18nextProvider>
-			</PersistGate>
-		</Provider>,
-		document.getElementById('root'),
-	);
-})
+	.then( (loaded) => {
+		const [configureStore, i18n] = loaded;
+		let {store, persistor} = configureStore.default();
+		ReactDOM.render(
+			<Provider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
+					<I18nextProvider i18n={i18n.default}>
+						<ServiceWorkerProvider>
+							<App />
+						</ServiceWorkerProvider>
+					</I18nextProvider>
+				</PersistGate>
+			</Provider>,
+			document.getElementById('root'),
+		);
+	});
 

@@ -10,13 +10,15 @@ module.exports = {
 		"jquery": true,
 		"browser": true
 	},
+	"parser": 'babel-eslint',
 	"parserOptions": {
 		"ecmaVersion": 2018,
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true,
 			"modules": true,
-		}
+		},
+		"allowImportExportEverywhere": true,
 	},
 	"rules": {
 		"jsx/uses-factory": [1, {"pragma": "JSX"}],

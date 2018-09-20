@@ -14,6 +14,8 @@ i18n.use(LanguageDetector).init({
 				fin: 'Finnish',
 				eng: 'English',
 				sve: 'Swedish',
+				broken: 'Broken',
+				fatal_error: 'Fatal error',
 			},
 		},
 		fi: {
@@ -27,6 +29,8 @@ i18n.use(LanguageDetector).init({
 				fin: 'Suomi',
 				eng: 'Englanti',
 				sve: 'Ruotsi',
+				broken: 'Rikki',
+				fatal_error: 'Vakava virhe',
 			},
 		},
 		sv: {
@@ -40,6 +44,8 @@ i18n.use(LanguageDetector).init({
 				fin: 'Finska',
 				eng: 'Engelska',
 				sve: 'Svenska',
+				broken: 'Bruten',
+				fatal_error: 'Allvarligt fel',
 			},
 		},
 	},
