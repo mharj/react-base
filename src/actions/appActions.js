@@ -41,13 +41,13 @@ export const getHome = (etag) => (dispatch) => {
 };
 
 export const doLogin = (username, password) => (dispatch) => {
-	if ( username === 'test' && password === 'password') {
-		return Promise.resolve( dispatch({type: TYPES.LOGIN}) );
+	if (username === 'test' && password === 'password') {
+		return Promise.resolve(dispatch({type: TYPES.LOGIN}));
 	} else {
-		return Promise.reject( dispatch({type: TYPES.LOGIN_ERROR, error: new Error('account or password not match')}) );
+		return Promise.reject(dispatch({type: TYPES.LOGIN_ERROR, error: new Error('account or password not match')}));
 	}
 };
 
 export const doLogout = () => (dispatch) => {
-	return Promise.resolve( dispatch({type: TYPES.LOGOUT}) );
+	return Promise.resolve(dispatch({type: TYPES.LOGOUT}));
 };

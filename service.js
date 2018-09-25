@@ -1,5 +1,7 @@
+
 const etag = require('etag');
 const express = require('express');
+// const fetch = require('cross-fetch'); // fetch API
 const app = express();
 app.set('etag', false);
 app.set('x-powered-by', false);
