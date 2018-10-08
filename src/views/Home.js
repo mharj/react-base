@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withNamespaces} from 'react-i18next';
 import actions from '../actions';
 
 class Home extends React.Component {
@@ -39,4 +39,4 @@ const mapStateToProps = (state) => {
 export default connect(
 	mapStateToProps,
 	actions,
-)(translate()(Home));
+)(withNamespaces()(Home));

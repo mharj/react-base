@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, HashRouter as Router, Link} from 'react-router-dom';
 import loadable from 'react-loadable';
-import {translate} from 'react-i18next';
+import {withNamespaces} from 'react-i18next';
 import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
@@ -89,4 +89,4 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.app.isLoggedIn,
 	};
 };
-export default connect(mapStateToProps)(translate()(App));
+export default connect(mapStateToProps)(withNamespaces()(App));

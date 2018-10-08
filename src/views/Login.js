@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withNamespaces} from 'react-i18next';
 import actions from '../actions';
 import {withRouter} from 'react-router-dom';
 
@@ -83,5 +83,5 @@ export default withRouter(
 	connect(
 		mapStateToProps,
 		actions,
-	)(translate()(Login)),
+	)(withNamespaces()(Login)),
 );
