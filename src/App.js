@@ -30,17 +30,24 @@ const Broken = loadable({
 });
 
 class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleLanguageChange = this.handleLanguageChange.bind(this);
+	}
+	handleLanguageChange(event) {
+		this.props.i18n.changeLanguage(event.target.value);
+	}
 	render() {
-		const {isLoggedIn, t, i18n} = this.props;
+		const {isLoggedIn, t} = this.props;
 		return (
 			<div className="App">
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
-				<button onClick={() => i18n.changeLanguage('fi-FI')}>{t('fin')}</button>
-				<button onClick={() => i18n.changeLanguage('en-EN')}>{t('eng')}</button>
-				<button onClick={() => i18n.changeLanguage('sv-SV')}>{t('sve')}</button>
+				<button value='fi-FI' onClick={this.handleLanguageChange}>{t('fin')}</button>
+				<button value='en-EN' onClick={this.handleLanguageChange}>{t('eng')}</button>
+				<button value='sv-SV' onClick={this.handleLanguageChange}>{t('sve')}</button>
 				<br />
 				{this.props.isLoading ? 'Fetching API data ..' : ''}
 				<br />
