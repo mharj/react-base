@@ -1,6 +1,9 @@
 import {ACTION_TYPES as TYPES} from '../reducers/appReducer';
 
-export const getHome = (etag) => (dispatch) => {
+export const getHome = () => (dispatch, getState) => {
+	const {
+		app: {etag},
+	} = getState();
 	dispatch({type: TYPES.LOADING});
 	setTimeout(() => {
 		//  ajax delay 1sec

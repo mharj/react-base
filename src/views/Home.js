@@ -6,7 +6,7 @@ import actions from '../actions';
 
 class Home extends React.Component {
 	componentDidMount() {
-		this.props.getHome(this.props.etag);
+		this.props.getHome();
 	}
 	render() {
 		const {t} = this.props;
@@ -32,7 +32,6 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		value: state.app.value,
-		etag: state.app.etag,
 	};
 };
 
