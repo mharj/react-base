@@ -2,8 +2,8 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
 import {withNamespaces} from 'react-i18next';
-import actions from '../actions';
 import {withRouter} from 'react-router-dom';
+import {doLogin, doLogout} from '../actions/appActions';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -38,9 +38,13 @@ class Login extends React.Component {
 			});
 	}
 	onChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
+		if (e.target && e.target.name !== undefined ) {
+			switch ( e.target.name ) {
+				case 'username': return this.setState({username: e.target.value});
+				case 'password': return this.setState({password: e.target.value});
+				default: break;
+			}
+		}
 	}
 	onKeyUp(e) {
 		if (e.keyCode === 13) {
@@ -79,9 +83,14 @@ const mapStateToProps = (state) => {
 	return {isLoggedIn: state.app.isLoggedIn};
 };
 
+const mapDispatchToProps = (dispatch) => ({
+	doLogin: (username, password) => dispatch(doLogin(username, password)),
+	doLogout: () => dispatch(doLogout()),
+});
+
 export default withRouter(
 	connect(
 		mapStateToProps,
-		actions,
+		mapDispatchToProps,
 	)(withNamespaces()(Login)),
 );

@@ -1,7 +1,14 @@
 import {combineReducers} from 'redux';
-import app from './appReducer';
+import {reducer as appReducer, initialState as appInitialState} from './appReducer';
 
-const appReducer = combineReducers({
-	app,
+export const GLOBAL_TYPES = Object.freeze({
+	RESET: 'RESET',
 });
-export default appReducer;
+
+export const rootReducer = combineReducers({
+	app: appReducer,
+});
+
+export const initialState = {
+	app: appInitialState,
+};

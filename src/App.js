@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, HashRouter as Router, Link} from 'react-router-dom';
+import {Switch, Route, HashRouter as Router, Link} from 'react-router-dom';
 import loadable from 'react-loadable';
 import {withNamespaces} from 'react-i18next';
 import logo from './logo.svg';
@@ -45,9 +45,15 @@ class App extends React.Component {
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
-				<button value='fi-FI' onClick={this.handleLanguageChange}>{t('fin')}</button>
-				<button value='en-EN' onClick={this.handleLanguageChange}>{t('eng')}</button>
-				<button value='sv-SV' onClick={this.handleLanguageChange}>{t('sve')}</button>
+				<button value="fi-FI" onClick={this.handleLanguageChange}>
+					{t('fin')}
+				</button>
+				<button value="en-EN" onClick={this.handleLanguageChange}>
+					{t('eng')}
+				</button>
+				<button value="sv-SV" onClick={this.handleLanguageChange}>
+					{t('sve')}
+				</button>
 				<br />
 				{this.props.isLoading ? 'Fetching API data ..' : ''}
 				<br />
@@ -55,7 +61,7 @@ class App extends React.Component {
 				<br />
 				<Router>
 					<div>
-						<ErrorBoundary onError={ErrorView} >
+						<ErrorBoundary onError={ErrorView}>
 							<div>
 								<Link to="/">
 									<button>{t('home')}</button>
@@ -71,10 +77,12 @@ class App extends React.Component {
 								</Link>
 							</div>
 							<br />
-							<Route exact={true} path="/" component={Home} />
-							<Route exact={true} path="/login" component={Login} />
-							<PrivateRoute isValid={isLoggedIn} failPath="/login" exact={true} path="/secret" component={Secret} />
-							<Route exact={true} path="/broken" component={Broken} />
+							<Switch>
+								<Route exact={true} path="/" component={Home} />
+								<Route exact={true} path="/login" component={Login} />
+								<PrivateRoute isValid={isLoggedIn} failPath="/login" exact={true} path="/secret" component={Secret} />
+								<Route exact={true} path="/broken" component={Broken} />
+							</Switch>
 						</ErrorBoundary>
 					</div>
 				</Router>

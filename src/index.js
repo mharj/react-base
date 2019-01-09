@@ -1,3 +1,4 @@
+import 'react-app-polyfill/ie9';
 import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import {I18nextProvider} from 'react-i18next';
@@ -15,7 +16,7 @@ Promise.all([
 ])
 	.then( (loaded) => {
 		const [configureStore, i18n] = loaded;
-		let {store, persistor} = configureStore.default();
+		const {store, persistor} = configureStore.default();
 		ReactDOM.render(
 			<Provider store={store}>
 				<PersistGate loading={null} persistor={persistor}>

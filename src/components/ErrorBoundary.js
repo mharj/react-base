@@ -30,7 +30,7 @@ class ErrorBoundary extends React.Component {
 		}
 	}
 	render() {
-		let ErrorView = this.props.onError;
+		const ErrorView = this.props.onError;
 		if (this.state.hasError) {
 			return <ErrorView error={this.state.error} />;
 		}

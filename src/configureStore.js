@@ -3,20 +3,12 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import {rootReducer, initialState} from './reducers';
 
 const persistConfig = {
 	key: 'root',
 	storage: storage,
 };
-
-const initialState = {
-	app: {
-		error: null,
-		etag: null,
-	},
-};
-
 const enhancers = [];
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -32,11 +24,11 @@ const composedEnhancers = compose(
 );
 
 export default () => {
-	let store = createStore(
+	const store = createStore(
 		persistedReducer,
 		initialState,
 		composedEnhancers,
 	);
-	let persistor = persistStore(store);
+	const persistor = persistStore(store);
 	return {store, persistor};
 };

@@ -2,11 +2,13 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
 import {withNamespaces} from 'react-i18next';
-import actions from '../actions';
+import {getHome} from '../actions/appActions';
 
 class Home extends React.Component {
 	componentDidMount() {
-		this.props.getHome();
+		this.props.getHome().then(() => {
+			console.log('async promise done');
+		});
 	}
 	render() {
 		const {t} = this.props;
@@ -35,7 +37,11 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchToProps = (dispatch) => ({
+	getHome: () => dispatch(getHome()),
+});
+
 export default connect(
 	mapStateToProps,
-	actions,
+	mapDispatchToProps,
 )(withNamespaces()(Home));
