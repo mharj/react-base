@@ -7,6 +7,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
 import ErrorBoundary from './components/ErrorBoundary';
+import {withServiceWorker} from './ServiceWorkerProvider';
 import ErrorView from './views/Error';
 
 const Loading = () => <div>Loading!...</div>;
@@ -89,7 +90,7 @@ class App extends React.Component {
 
 				<br />
 				<b>
-					Service Worker status: {this.props.workerState} <button onClick={this.props.swCheckUpdate}>Check updates</button>
+					Service Worker status: {this.props.serviceWorkerState} <button onClick={this.props.serviceWorkerUpdate}>Check updates</button>
 				</b>
 				<br />
 				{process.env.NODE_ENV !== 'production' ? <pre style={{textAlign: 'left'}}>{this.props.error && this.props.error.stack}</pre> : null}
@@ -104,4 +105,4 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.app.isLoggedIn,
 	};
 };
-export default connect(mapStateToProps)(withNamespaces()(App));
+export default connect(mapStateToProps)(withNamespaces()(withServiceWorker(App)));

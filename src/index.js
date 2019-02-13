@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
-import ServiceWorkerProvider from './ServiceWorkerProvider';
+import {ServiceWorkerProvider} from './ServiceWorkerProvider';
 
 Promise.all([
 	import('./configureStore' /* webpackChunkName: "configurestore" */),

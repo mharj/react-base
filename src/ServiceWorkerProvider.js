@@ -1,37 +1,53 @@
 import React from 'react';
 
-class ServiceWorkerProvider extends React.Component {
+const initialContext = {
+	serviceWorkerState: null,
+	serviceWorkerUpdate: null,
+};
+
+const WorkerContext = React.createContext(initialContext);
+
+export const ServiceWorkerConsumer = WorkerContext.Consumer;
+
+export function withServiceWorker(WrappedComponent) {
+	return function Wrapper(props) {
+		return <ServiceWorkerConsumer>{(value) => <WrappedComponent {...props} {...value} />}</ServiceWorkerConsumer>;
+	};
+}
+
+export class ServiceWorkerProvider extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			workerState: null,
-			updateFunction: null,
-		};
-		this.reloadCallback = this.reloadCallback.bind(this);
+		this.state = initialContext;
+		this.onServiceStateChange = this.onServiceStateChange.bind(this);
 		this.runUpdate = this.runUpdate.bind(this);
 		this.getUpdateFunction = this.getUpdateFunction.bind(this);
 	}
 	componentDidMount() {
-		import('./registerServiceWorker' /* webpackChunkName: "register-service-worker" */)
-			.then((registerServiceWorker) => registerServiceWorker.default(this.reloadCallback, this.getUpdateFunction));
+		import('./registerServiceWorker' /* webpackChunkName: "register-service-worker" */).then((registerServiceWorker) =>
+			registerServiceWorker.default(this.onServiceStateChange, this.getUpdateFunction),
+		);
 	}
-	reloadCallback(state) {
+	render() {
+		const contextValue = {
+			serviceWorkerState: this.state.serviceWorkerState,
+			serviceWorkerUpdate: this.runUpdate,
+		};
+		return <WorkerContext.Provider value={contextValue}>{this.props.children}</WorkerContext.Provider>;
+	}
+	onServiceStateChange(state) {
 		this.setState({
-			workerState: state,
+			serviceWorkerState: state,
 		});
 	}
-	getUpdateFunction(update) {
+	getUpdateFunction(callback) {
 		this.setState({
-			updateFunction: update,
+			serviceWorkerUpdate: callback,
 		});
 	}
 	runUpdate() {
-		if (this.state.updateFunction) {
-			this.state.updateFunction();
+		if (this.state.serviceWorkerUpdate) {
+			this.state.serviceWorkerUpdate();
 		}
 	}
-	render() {
-		return React.cloneElement(React.Children.only(this.props.children), {workerState: this.state.workerState, swCheckUpdate: this.runUpdate});
-	}
 }
-export default ServiceWorkerProvider;
