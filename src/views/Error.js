@@ -1,6 +1,6 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import {withNamespaces} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class ErrorView extends React.Component {
 	render() {
@@ -19,4 +19,4 @@ class ErrorView extends React.Component {
 	}
 }
 
-export default withNamespaces()(ErrorView);
+export default withTranslation()(ErrorView);

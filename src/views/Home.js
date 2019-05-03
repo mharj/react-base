@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
-import {withNamespaces} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {getHome} from '../actions/appActions';
 
 class Home extends React.Component {
@@ -44,4 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
-)(withNamespaces()(Home));
+)(withTranslation()(Home));

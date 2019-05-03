@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route, HashRouter as Router, Link} from 'react-router-dom';
 import loadable from 'react-loadable';
-import {withNamespaces} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
@@ -105,4 +105,4 @@ const mapStateToProps = (state) => {
 		isLoggedIn: state.app.isLoggedIn,
 	};
 };
-export default connect(mapStateToProps)(withNamespaces()(withServiceWorker(App)));
+export default connect(mapStateToProps)(withTranslation()(withServiceWorker(App)));

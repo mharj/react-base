@@ -1,6 +1,6 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import {withNamespaces} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class Secret extends React.Component {
 	constructor(props) {
@@ -21,4 +21,4 @@ class Secret extends React.Component {
 	}
 }
 
-export default withNamespaces()(Secret);
+export default withTranslation()(Secret);

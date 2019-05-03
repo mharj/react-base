@@ -1,5 +1,22 @@
 import {ACTION_TYPES as TYPES} from '../reducers/appReducer';
 
+// actions
+const appLoading = (isLoading) => {
+	return {type: TYPES.APP_LOADING, isLoading};
+};
+
+const appError = (error) => {
+	return {type: TYPES.APP_ERROR, error};
+};
+
+const appLogin = (isLoggedIn) => {
+	return {type: TYPES.APP_LOGIN, isLoggedIn};
+};
+
+const appData = (value, etag) => {
+	return {type: TYPES.APP_DATA, value, etag};
+};
+
 // demo helper
 const delay = (duration) => {
 	return new Promise((resolve) => {
@@ -9,47 +26,65 @@ const delay = (duration) => {
 	});
 };
 
+// async actions
+/**
+ * getHome
+ * @return {Promise<Action>}
+ */
 export const getHome = () => (dispatch, getState) => {
 	const {
 		app: {etag},
 	} = getState();
-	dispatch({type: TYPES.LOADING});
+	dispatch(appLoading(true));
 	//  ajax delay 1sec
 	const headers = {};
 	if (etag) {
 		headers['if-none-match'] = etag;
 	}
 	return delay(1000).then(() => {
-		return fetch('/api/hello', {headers: headers})
+		return fetch('/api/hello', {headers})
 			.then((response) => {
+				dispatch(appLoading(false));
 				let etag = null;
 				if (response.status === 304) {
-					return Promise.resolve(dispatch({type: TYPES.LOADING_NO_CHANGE}));
+					return Promise.resolve();
+				} else if (response.status !== 200 ) {
+					return Promise.reject(dispatch(appError(new Error('http error '+response.status))));
 				} else {
 					if (response.headers.has('ETag')) {
 						etag = response.headers.get('ETag').replace(/"/g, '');
 					}
 					return response.json().then((json) => {
 						if (json && json.hello) {
-							return Promise.resolve(dispatch({type: TYPES.LOADING_DONE, value: json.hello, etag: etag}));
+							return Promise.resolve(dispatch(appData(json.hello, etag)));
 						}
 					});
 				}
 			})
 			.catch((error) => {
-				return Promise.reject(dispatch({type: TYPES.LOADING_ERROR, error}));
+				return Promise.reject(dispatch(appError(error)));
 			});
 	});
 };
 
+/**
+ * doLogin
+ * @param {string} username
+ * @param {string} password
+ * @return {Promise<Action>}
+ */
 export const doLogin = (username, password) => (dispatch) => {
 	if (username === 'test' && password === 'password') {
-		return Promise.resolve(dispatch({type: TYPES.LOGIN}));
+		return Promise.resolve(dispatch(appLogin(true)));
 	} else {
-		return Promise.reject(dispatch({type: TYPES.LOGIN_ERROR, error: new Error('account or password not match')}));
+		return Promise.reject(dispatch(appError(new Error('account or password not match'))));
 	}
 };
 
+/**
+ * doLogout
+ * @return {Promise<Action>}
+ */
 export const doLogout = () => (dispatch) => {
-	return Promise.resolve(dispatch({type: TYPES.LOGOUT}));
+	return Promise.resolve(dispatch(appLogin(false)));
 };
