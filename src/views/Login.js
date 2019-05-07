@@ -17,7 +17,8 @@ class Login extends React.Component {
 		this.onChange = this.onChange.bind(this);
 		this.onKeyUp = this.onKeyUp.bind(this);
 	}
-	handleLogin() {
+	handleLogin(e) {
+		e.preventDefault();
 		this.props
 			.doLogin(this.state.username, this.state.password)
 			.then(() => {
@@ -27,7 +28,8 @@ class Login extends React.Component {
 				// ignore
 			});
 	}
-	handleLogout() {
+	handleLogout(e) {
+		e.preventDefault();
 		this.props
 			.doLogout()
 			.then(() => {
@@ -49,8 +51,6 @@ class Login extends React.Component {
 	onKeyUp(e) {
 		if (e.keyCode === 13) {
 			e.preventDefault();
-			e.stopPropagation();
-			e.nativeEvent.stopImmediatePropagation();
 			this.handleLogin();
 		}
 		return false;
@@ -63,16 +63,16 @@ class Login extends React.Component {
 					<title>{t('login')}</title>
 				</Helmet>
 				{isLoggedIn ? (
-					<div>
+					<form>
 						<button onClick={this.handleLogout}>{t('logout')}</button>
-					</div>
+					</form>
 				) : (
-					<div>
-						Username: <input name="username" type="text" onChange={this.onChange} value={this.state.username} /> <br />
-						Password: <input name="password" type="password" onKeyUp={this.onKeyUp} onChange={this.onChange} value={this.state.password} />
+					<form>
+						Username: <input name="username" type="text" autoComplete="username" onChange={this.onChange} value={this.state.username} /> <br />
+						Password: <input name="password" type="password" autoComplete="current-password" onKeyUp={this.onKeyUp} onChange={this.onChange} value={this.state.password} />
 						<br />
 						<button onClick={this.handleLogin}>{t('login')}</button>
-					</div>
+					</form>
 				)}
 			</div>
 		);
