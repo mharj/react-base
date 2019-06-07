@@ -11,7 +11,6 @@ import {ServiceWorkerProvider} from './ServiceWorkerProvider';
 Promise.all([
 	import('./configureStore' /* webpackChunkName: "configurestore" */),
 	import('./i18n' /* webpackChunkName: "i18n" */),
-	import('babel-polyfill' /* webpackChunkName: "polyfill" */),
 	import('cross-fetch/polyfill' /* webpackChunkName: "fetch" */),
 ])
 	.then( (loaded) => {
