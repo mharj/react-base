@@ -1,14 +1,21 @@
 import {combineReducers} from 'redux';
-import {reducer as appReducer, initialState as appInitialState} from './appReducer';
+import * as app from './appReducer';
 
 export const GLOBAL_TYPES = Object.freeze({
 	RESET: 'RESET',
 });
 
-export const rootReducer = combineReducers({
-	app: appReducer,
-});
-
+/**
+ * Combine all initial states
+ * @see {@link createStore/default}
+ */
 export const initialState = {
-	app: appInitialState,
+	app: app.initialState,
 };
+
+/**
+ * Combine all reducers with names
+ */
+export const rootReducer = combineReducers({
+	app: app.reducer,
+});

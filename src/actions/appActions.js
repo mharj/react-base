@@ -1,19 +1,19 @@
 import {ACTION_TYPES as TYPES} from '../reducers/appReducer';
 
 // actions
-const appLoading = (isLoading) => {
+export const appLoading = (isLoading) => {
 	return {type: TYPES.APP_LOADING, isLoading};
 };
 
-const appError = (error) => {
+export const appError = (error) => {
 	return {type: TYPES.APP_ERROR, error};
 };
 
-const appLogin = (isLoggedIn) => {
+export const appLogin = (isLoggedIn) => {
 	return {type: TYPES.APP_LOGIN, isLoggedIn};
 };
 
-const appData = (value, etag) => {
+export const appData = (value, etag) => {
 	return {type: TYPES.APP_DATA, value, etag};
 };
 
