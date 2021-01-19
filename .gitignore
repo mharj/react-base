@@ -22,3 +22,9 @@ yarn-error.log*
 
 # ignore src css as scss is used
 src/*.css
+
+# debug.log
+debug.log
+
+# eslint cache
+.eslintcache

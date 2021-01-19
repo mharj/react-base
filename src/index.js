@@ -9,12 +9,13 @@ import {Provider} from 'react-redux';
 import {ServiceWorkerProvider} from './ServiceWorkerProvider';
 
 Promise.all([
-	import('./configureStore' /* webpackChunkName: "configurestore" */),
+	import('./configureStore' /* webpackChunkName: "configurestore", webpackPreload: true */),
 	import('./i18n' /* webpackChunkName: "i18n" */),
-	import('cross-fetch/polyfill' /* webpackChunkName: "fetch" */),
+	import('./reportWebVitals' /* webpackChunkName: "web-vitals", webpackPreload: true */),
+	import('cross-fetch/polyfill' /* webpackChunkName: "fetch", webpackPreload: true */),
 ])
 	.then( (loaded) => {
-		const [configureStore, i18n] = loaded;
+		const [configureStore, i18n, reportWebVitals] = loaded;
 		const {store, persistor} = configureStore.default();
 		ReactDOM.render(
 			<Provider store={store}>
@@ -28,5 +29,9 @@ Promise.all([
 			</Provider>,
 			document.getElementById('root'),
 		);
+		// If you want to start measuring performance in your app, pass a function
+		// to log results (for example: reportWebVitals.default(console.log))
+		// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+		reportWebVitals.default();
 	});
 
